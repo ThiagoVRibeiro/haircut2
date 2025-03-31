@@ -7,7 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class TipoPagamentoController {
 
 	@GetMapping("/")
+	public String acessarPaginaInicial() {
+		return "index";
+	}
+	
+	@GetMapping("/tipo-pagamento")
 	public String listarTipoPagamento() {
-		return "/ListaTipoPagamento";
+		return "lista-tipo-pagamento";
 	}
 }
