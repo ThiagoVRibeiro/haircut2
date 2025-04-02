@@ -1,5 +1,7 @@
 package com.study.haircut2.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,10 @@ public class TipoPagamentoService {
 	//Salvar tipo de pagamento
 	public TipoPagamento criarTipoPagamento(TipoPagamento tipoPagamento) {
 		return tipoPagamentoRepository.save(tipoPagamento);
-		
+	}
+	
+	//ListarPagamento
+	public List<TipoPagamento> buscarTodosTiposPagamentos(){
+		return tipoPagamentoRepository.findAll();
 	}
 }

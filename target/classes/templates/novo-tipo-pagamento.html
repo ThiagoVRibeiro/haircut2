@@ -32,31 +32,32 @@
 	<div class="container">
 		<div class="row" style="padding-bottom: 30px">
 			<div class="col">
-				<a th:href="@{/novo-tipo-pagamento}" class="btn btn-primary">Novo</a>
+				<h2>Cadastro de tipo de pagamento</h2>
+				<div class="alert alert-success alert-dismissible fade show"
+					th:if="${mensagem}">
+					<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+					<span th:text="${mensagem}"></span>
+				</div>
+				<form th:action="@{/cadastrarTipoPagamento}" th:object="${novoTipoPagamento}" method="post">
+					<div class="form-row align-items-center">
+						<div class="col-sm-3 my-1">
+							<label class="sr-only" for="inlineFormInputName">Nome</label>
+							<input
+								type="text" class="form-control" id="inlineFormInputName"
+								placeholder="Insira o tipo de pagamento" th:field="*{nome}">
+						</div>
+						<div class="col-sm-5">
+							<span class="mensagem" th:if="${#fields.hasErrors('nome')}"
+								th:errors="*{nome}"></span>
+						</div>
+						<div class="col-auto my-1">
+							<button type="submit" class="btn btn-primary">Cadastrar</button>
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
-
-	<!-- Lista de tipo de pagamentos -->
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th scope="col">ID</th>
-				<th scope="col">Nome</th>
-				<!--       <th scope="col">Last</th> -->
-				<!--       <th scope="col">Handle</th> -->
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:if="${listaTipoPagamento.empty}">
-				<td colspan="3">Não existem tipos de pagamentos cadastrados.</td>
-			</tr>
-			<tr th:each="tipoPagamento : ${listaTipoPagamento}">
-				<td><span th:text="${tipoPagamento.id}"></span></td>
-				<td><span th:text="${tipoPagamento.nome}"></span></td>
-			</tr>
-		</tbody>
-	</table>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
