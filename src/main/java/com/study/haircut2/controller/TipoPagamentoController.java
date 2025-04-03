@@ -8,9 +8,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.study.haircut2.exception.TipoPagamentoNotFoundException;
 import com.study.haircut2.model.TipoPagamento;
 import com.study.haircut2.service.TipoPagamentoService;
 
@@ -50,6 +52,16 @@ public class TipoPagamentoController {
 		}
 		tipoPagamentoService.criarTipoPagamento(tipoPagamento);
 		attributes.addFlashAttribute("mensagem", "Tipo de pagamento salvo com sucesso!");
+		return "redirect:/tipo-pagamento";
+	}
+	
+	@GetMapping("/apagar/{id}")
+	public String apagarTipoPagamento(@PathVariable("id") long id, RedirectAttributes attributes) {
+		try {
+			tipoPagamentoService.apagarTipoDePagamento(id);
+		} catch (TipoPagamentoNotFoundException e) {
+			attributes.addFlashAttribute("mensagemErro", e.getMessage());
+		}
 		return "redirect:/tipo-pagamento";
 	}
 }
