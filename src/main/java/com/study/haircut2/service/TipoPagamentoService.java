@@ -43,4 +43,8 @@ public class TipoPagamentoService {
 	public TipoPagamento editarTipoPagamento(TipoPagamento tipoPagamento) {
 		return tipoPagamentoRepository.save(tipoPagamento);
 	}
+	
+	public List<TipoPagamento> buscarTodosTiposPagamentosPorNome(String nome){
+		return tipoPagamentoRepository.findByNomeContainingIgnoreCase(nome);
+	}
 }

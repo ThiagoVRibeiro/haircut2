@@ -3,6 +3,7 @@ package com.study.haircut2.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,7 +35,7 @@ public class TipoPagamentoController {
 	public String listarTipoPagamento(Model model) {
 		List<TipoPagamento> tipoPagamentos = tipoPagamentoService.buscarTodosTiposPagamentos();
 		model.addAttribute("listaTipoPagamento", tipoPagamentos);
-		return "lista-tipo-pagamento";
+		return "/lista-tipo-pagamento";
 	}
 	
 	@GetMapping("/novo-tipo-pagamento")
@@ -88,6 +89,16 @@ public class TipoPagamentoController {
 		}
 		tipoPagamentoService.editarTipoPagamento(tipoPagamento);
 		return "redirect:/tipo-pagamento";
+	}
+	
+	@PostMapping("/buscar")
+	public String buscarTipoPagamento(Model model, @Param("nome") String nome) {
+		if(nome == null) {
+			return "redirect:/tipo-pagamento";
+		}
+		List<TipoPagamento> tipoPagamentos = tipoPagamentoService.buscarTodosTiposPagamentosPorNome(nome);
+		model.addAttribute("listaTipoPagamento", tipoPagamentos);
+		return "/lista-tipo-pagamento";
 	}
 	
 }
