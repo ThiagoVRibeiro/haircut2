@@ -64,6 +64,10 @@
 						th:data-confirm-delete="|Você gostaria de apagar ${tipoPagamento.nome}?|"
 						th:onclick="if(!confirm(this.getAttribute('data-confirm-delete')))
 							return false"></a>
+						&nbsp;
+						<a class="fa-regular fa-pen-to-square icon-dark"
+						th:href="@{/editar/{id}(id=${tipoPagamento.id})}"
+						></a>
 					</td>
 				</tr>
 			</tbody>

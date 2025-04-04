@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.study.haircut2.exception.TipoPagamentoNotFoundException;
 import com.study.haircut2.model.TipoPagamento;
+import com.study.haircut2.repository.TipoPagamentoRepository;
 import com.study.haircut2.service.TipoPagamentoService;
 
 import jakarta.validation.Valid;
@@ -64,4 +65,29 @@ public class TipoPagamentoController {
 		}
 		return "redirect:/tipo-pagamento";
 	}
+	
+	@GetMapping("/editar/{id}")
+	public String editarFormTipoPagamento(@PathVariable("id") long id, RedirectAttributes attributes, Model model) {
+		try {
+			TipoPagamento tipoPagamento = tipoPagamentoService.buscarTipoPagamentoPorId(id);
+			model.addAttribute("objetoTipoPagamento", tipoPagamento);
+			return "/editar-tipo-pagamento";
+		} catch (TipoPagamentoNotFoundException e) {
+			attributes.addFlashAttribute("mensagemErro", e.getMessage());
+		}
+		return "redirect:/";
+	}
+	
+	@PostMapping("/editar/{id}")
+	public String editarTipoPagamento(@PathVariable("id") long id,
+									@ModelAttribute("objetoTipoPagamento") @Valid TipoPagamento tipoPagamento,
+									BindingResult erros) {
+		if(erros.hasErrors()) {
+			tipoPagamento.setId(id);
+			return "/editar-tipo-pagamento";
+		}
+		tipoPagamentoService.editarTipoPagamento(tipoPagamento);
+		return "redirect:/tipo-pagamento";
+	}
+	
 }

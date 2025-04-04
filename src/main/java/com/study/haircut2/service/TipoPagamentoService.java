@@ -39,4 +39,8 @@ public class TipoPagamentoService {
 		TipoPagamento tipoPagamento = buscarTipoPagamentoPorId(id);
 		tipoPagamentoRepository.delete(tipoPagamento);
 	}
+	
+	public TipoPagamento editarTipoPagamento(TipoPagamento tipoPagamento) {
+		return tipoPagamentoRepository.save(tipoPagamento);
+	}
 }
