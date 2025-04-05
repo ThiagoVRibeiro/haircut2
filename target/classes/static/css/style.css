@@ -1,10 +1,17 @@
 @charset "UTF-8";
 
 .menu-principal{
-	margin-top: 10px;
-  	margin-left: 10px;
+  	background-color: #a3cfbb;
+}
+
+.menu-itens{
+	margin-left: 30px;
 }
 
 .mensagem{
 	color: red;
+}
+
+.dropdown-menu{
+	background-color: #a3cfbb !important;
 }
