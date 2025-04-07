@@ -35,14 +35,14 @@ public class TipoPagamentoController {
 	public String listarTipoPagamento(Model model) {
 		List<TipoPagamento> tipoPagamentos = tipoPagamentoService.buscarTodosTiposPagamentos();
 		model.addAttribute("listaTipoPagamento", tipoPagamentos);
-		return "/lista-tipo-pagamento";
+		return "/tipopagamento/lista-tipo-pagamento";
 	}
 	
 	@GetMapping("/novo-tipo-pagamento")
 	public String novoTipoPagamento(Model model) {
 		TipoPagamento tipoPagamento = new TipoPagamento();
 		model.addAttribute("novoTipoPagamento", tipoPagamento);
-		return "/novo-tipo-pagamento";
+		return "/tipopagamento/novo-tipo-pagamento";
 	}
 	
 	@PostMapping("/cadastrarTipoPagamento")
@@ -50,7 +50,7 @@ public class TipoPagamentoController {
 			BindingResult erros,
 			RedirectAttributes attributes) {
 		if(erros.hasErrors()) {
-			return "/novo-tipo-pagamento";
+			return "/tipopagamento/novo-tipo-pagamento";
 		}
 		tipoPagamentoService.criarTipoPagamento(tipoPagamento);
 		attributes.addFlashAttribute("mensagem", "Tipo de pagamento salvo com sucesso!");
@@ -72,7 +72,7 @@ public class TipoPagamentoController {
 		try {
 			TipoPagamento tipoPagamento = tipoPagamentoService.buscarTipoPagamentoPorId(id);
 			model.addAttribute("objetoTipoPagamento", tipoPagamento);
-			return "/editar-tipo-pagamento";
+			return "/tipopagamento/editar-tipo-pagamento";
 		} catch (TipoPagamentoNotFoundException e) {
 			attributes.addFlashAttribute("mensagemErro", e.getMessage());
 		}
@@ -85,7 +85,7 @@ public class TipoPagamentoController {
 									BindingResult erros) {
 		if(erros.hasErrors()) {
 			tipoPagamento.setId(id);
-			return "/editar-tipo-pagamento";
+			return "/tipopagamento/editar-tipo-pagamento";
 		}
 		tipoPagamentoService.editarTipoPagamento(tipoPagamento);
 		return "redirect:/tipo-pagamento";
@@ -98,7 +98,7 @@ public class TipoPagamentoController {
 		}
 		List<TipoPagamento> tipoPagamentos = tipoPagamentoService.buscarTodosTiposPagamentosPorNome(nome);
 		model.addAttribute("listaTipoPagamento", tipoPagamentos);
-		return "/lista-tipo-pagamento";
+		return "/tipopagamento/lista-tipo-pagamento";
 	}
 	
 }
