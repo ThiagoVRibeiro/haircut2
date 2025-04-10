@@ -1,5 +1,7 @@
 package com.study.haircut2.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +23,9 @@ public class TipoServicoController {
 	private TipoServicoService tipoServicoService;
 	
 	@GetMapping("/tipo-servico")
-	public String listarTipoServico() {
+	public String listarTipoServico(Model model) {
+		List<TipoServico> tipoServico = tipoServicoService.buscarTodosTiposServicos();
+		model.addAttribute("listaTipoServico", tipoServico);
 		return "/tiposervico/lista-tipo-servico";
 	}
 	
