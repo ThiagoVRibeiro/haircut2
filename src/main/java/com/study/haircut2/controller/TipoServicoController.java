@@ -8,9 +8,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.study.haircut2.exception.TipoServicoNotFoundException;
 import com.study.haircut2.model.TipoServico;
 import com.study.haircut2.service.TipoServicoService;
 
@@ -49,11 +51,15 @@ public class TipoServicoController {
 		return "redirect:/tipo-servico";
 	}
 	
-//	@PostMapping("/cadastrarTipoServico")
-//	public String cadastrarTipoServico(@ModelAttribute("novoTipoServico") TipoServico tipoServico, RedirectAttributes attributes) {
-//		tipoServicoService.criarTipoServico(tipoServico);
-//		attributes.addFlashAttribute("mensagem", "Tipo de servico salvo com sucesso!");
-//		return "redirect:/novo-tipo-servico";
-//	}
+	//método que irá apagar
+	@GetMapping("/apagar-tipo-servico/{id}")
+	public String apagarTipoServico(@PathVariable("id") long id, RedirectAttributes attributes) {
+		try {
+			tipoServicoService.apagarTipoDeServico(id);
+		} catch (TipoServicoNotFoundException e) {
+			attributes.addFlashAttribute("mensagemErro", e.getMessage());
+		}
+		return "redirect:/tipo-servico";
+	}
 	
 }

@@ -63,7 +63,7 @@
 					<td><span th:text="${tipoServico.id}"></span></td>
 					<td><span th:text="${tipoServico.nome}"></span></td>
 					<td><a class="fa-regular fa-trash-can icon-dark btn-delete"
-						th:href="@{/apagar/{id}(id=${tipoServico.id})}"
+						th:href="@{/apagar-tipo-servico/{id}(id=${tipoServico.id})}"
 						th:data-confirm-delete="|Você gostaria de apagar ${tipoServico.nome}?|"
 						th:onclick="if(!confirm(this.getAttribute('data-confirm-delete')))
 							return false"></a>
