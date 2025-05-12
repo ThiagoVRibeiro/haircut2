@@ -62,4 +62,17 @@ public class TipoServicoController {
 		return "redirect:/tipo-servico";
 	}
 	
+	//método que irá editar
+	@GetMapping("/editar-tipo-servico/{id}")
+	public String editarTipoServicoForm(@PathVariable("id") long id, RedirectAttributes attributes, Model model) {
+		try {
+			TipoServico tipoServico = tipoServicoService.buscarTipoServicoPorId(id);
+			model.addAttribute("objetoTipoServico", tipoServico);
+			return "/tiposervico/editar-tipo-servico";
+		} catch (TipoServicoNotFoundException e) {
+			attributes.addFlashAttribute("mensagemErro", e.getMessage());
+		}
+		return "redirect:/tipo-servico";
+	}
+	
 }
