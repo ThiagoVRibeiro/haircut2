@@ -75,4 +75,16 @@ public class TipoServicoController {
 		return "redirect:/tipo-servico";
 	}
 	
+	//método que irá gravar a edição
+	@PostMapping("/editar-tipo-servico/{id}")
+	public String editarTipoServico(@PathVariable("id") long id, @ModelAttribute("objetoTipoServico") @Valid TipoServico tipoServico,
+			BindingResult erros) {
+		if(erros.hasErrors()) {
+			tipoServico.setId(id);
+			return "/tiposervico/editar-tipo-servico";
+		}
+		tipoServicoService.editarTipoServico(tipoServico);
+		return "redirect:/tipo-servico";
+	}
+	
 }

@@ -41,4 +41,9 @@ public class TipoServicoService {
 		TipoServico tipoServico = buscarTipoServicoPorId(id);
 		tipoServicoRepository.delete(tipoServico);
 	}
+	
+	//método que irá editar
+	public TipoServico editarTipoServico(TipoServico tipoServico) {
+		return tipoServicoRepository.save(tipoServico);
+	}
 }
