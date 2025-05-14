@@ -3,6 +3,7 @@ package com.study.haircut2.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -85,6 +86,17 @@ public class TipoServicoController {
 		}
 		tipoServicoService.editarTipoServico(tipoServico);
 		return "redirect:/tipo-servico";
+	}
+	
+	//método que irá buscar
+	@PostMapping("/buscar-tipo-servico")
+	public String buscarTipoServico(Model model, @Param("nome") String nome ){
+		if(nome == null) {
+			return "redirect:/tipo-servico";
+		}
+		List<TipoServico> tipoServico = tipoServicoService.buscarTodosTiposServicosPorNome(nome);
+		model.addAttribute("listaTipoServico", tipoServico);
+		return "/tiposervico/lista-tipo-servico";
 	}
 	
 }

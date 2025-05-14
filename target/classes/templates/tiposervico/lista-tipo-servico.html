@@ -37,7 +37,17 @@
 	</div>
 
 	<!--	Pesquisar tipo de sevico -->
-
+<div class="row">
+		<div class="col-sm-5">
+			<form th:action="@{/buscar-tipo-servico}" method="post">
+				<div class="input-group">
+					<input type="text"  class="form-control" name="nome"/>
+					<input class="btn btn-primary" type="submit" value="Buscar" />
+					<a th:href="@{/tipo-servico}" class="btn btn-danger" type="submit">Cancelar</a>
+				</div>
+			</form>
+		</div>
+	</div>
 
 <!-- Listar tipos de serviço -->
 		<div class="alert alert-danger alert-dismissible fade show"

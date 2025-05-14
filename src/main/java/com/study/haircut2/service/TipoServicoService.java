@@ -46,4 +46,10 @@ public class TipoServicoService {
 	public TipoServico editarTipoServico(TipoServico tipoServico) {
 		return tipoServicoRepository.save(tipoServico);
 	}
+	
+	//Método para buscar
+	public List<TipoServico> buscarTodosTiposServicosPorNome(String nome){
+		return tipoServicoRepository.findByNomeContainingIgnoreCase(nome);
+	}
+	
 }
