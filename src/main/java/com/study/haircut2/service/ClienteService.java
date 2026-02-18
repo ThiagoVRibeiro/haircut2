@@ -29,5 +29,10 @@ public class ClienteService {
 	public List<Cliente> buscarTodosClientesPorNome(String nome){
 		return clienteRepository.findByNomeContainingIgnoreCase(nome);
 	}
-
+	
+	//editarcliente
+	public Cliente editarCliente(Cliente cliente) {
+		return clienteRepository.save(cliente);
+	}
+	
 }
