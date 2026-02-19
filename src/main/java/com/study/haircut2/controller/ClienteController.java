@@ -9,9 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.study.haircut2.exception.ClienteNotFoundException;
+import com.study.haircut2.exception.TipoPagamentoNotFoundException;
 import com.study.haircut2.model.Cliente;
 import com.study.haircut2.model.TipoPagamento;
 import com.study.haircut2.service.ClienteService;
@@ -62,13 +65,44 @@ public class ClienteController {
 	}
 	
 	
-//	@PostMapping("/buscar")
-//	public String buscarTipoPagamento(Model model, @Param("nome") String nome) {
-//		if(nome == null) {
-//			return "redirect:/tipo-pagamento";
-//		}
-//		List<TipoPagamento> tipoPagamentos = tipoPagamentoService.buscarTodosTiposPagamentosPorNome(nome);
-//		model.addAttribute("listaTipoPagamento", tipoPagamentos);
-//		return "/tipopagamento/lista-tipo-pagamento";
-//	}
+	//Editar cliente
+	//método que irá preencher os dados para editar
+	@GetMapping("editar-cliente/{id}")
+	public String editarFormCliente(@PathVariable("id") long id, RedirectAttributes attributes, Model model) {
+		try {
+			Cliente cliente = clienteService.buscarClientePorId(id);
+			model.addAttribute("objetoCliente", cliente);
+			return "/cliente/editar-cliente";
+		}catch(ClienteNotFoundException e) {
+			attributes.addFlashAttribute("mensagemErro", e.getMessage());
+		}
+		return "redirect:/";
+	}
+		
+	//método que irá salvar o que foi editado
+	
+	@PostMapping("/editar-cliente/{id}")
+	public String editarCliente(@PathVariable("id") long id,
+									@ModelAttribute("objetoCliente") @Valid Cliente cliente,
+									BindingResult erros) {
+		if(erros.hasErrors()) {
+			cliente.setId(id);
+			return "/cliente/editar-cliente";
+		}
+		clienteService.editarCliente(cliente);
+		return "redirect:/cliente";
+	}
+	
+	//Apagar Cliente
+	
+	@GetMapping("/apagar-cliente/{id}")
+	public String apagarCliente(@PathVariable("id") long id, RedirectAttributes attributes) {
+		try {
+			clienteService.apagarCliente(id);
+		}catch(ClienteNotFoundException e) {
+			attributes.addFlashAttribute("mensagemErro", e.getMessage());
+		}
+		return "redirect:/cliente";
+	}
+	
 }

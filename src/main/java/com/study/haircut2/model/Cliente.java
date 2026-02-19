@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -18,6 +19,7 @@ public class Cliente {
 	@Size(min=2, message="Tem que ter no mínimo 2 caracteres")
 	private String nome;
 	
+	@Pattern(regexp = "\\d{11}", message = "Telefone deve estar no formato 35987654321")
 	private String telefone;
 	
 	private String observacao;

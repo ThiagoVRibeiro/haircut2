@@ -75,13 +75,13 @@
 					<td><span th:text="${cliente.observacao}"></span></td>
 					<td><span th:text="${cliente.telefone}"></span></td>
 					<td><a class="fa-regular fa-trash-can icon-dark btn-delete"
-						th:href="@{/apagar/{id}(id=${cliente.id})}"
+						th:href="@{/apagar-cliente/{id}(id=${cliente.id})}"
 						th:data-confirm-delete="|Você gostaria de apagar ${cliente.nome}?|"
 						th:onclick="if(!confirm(this.getAttribute('data-confirm-delete')))
 							return false"></a>
 						&nbsp;
 						<a class="fa-regular fa-pen-to-square icon-dark"
-						th:href="@{/editar/{id}(id=${cliente.id})}"
+						th:href="@{/editar-cliente/{id}(id=${cliente.id})}"
 						></a>
 					</td>
 				</tr>

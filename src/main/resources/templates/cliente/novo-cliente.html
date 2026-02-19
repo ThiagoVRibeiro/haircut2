@@ -52,7 +52,11 @@
 							<label class="sr-only" for="inlineFormInputTelefone">Telefone</label>
 							<input
 								type="text" class="form-control" id="inlineFormInputTelefone"
-								placeholder="Insira um telefone. Ex.(35) 99898-9898" th:field="*{telefone}">
+								placeholder="Insira um telefone. Ex.35998989898" th:field="*{telefone}">
+							<div th:if="${#fields.hasErrors('telefone')}" 
+							     th:errors="*{telefone}" 
+							     class="text-danger">
+							</div>
 						</div>
 						<div class="col-sm-5">
 							<span class="mensagem" th:if="${#fields.hasErrors('nome')}"
