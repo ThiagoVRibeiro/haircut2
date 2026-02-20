@@ -22,7 +22,7 @@ public class Servico {
 	
 	@ManyToOne
 	@JoinColumn(name = "tipo_servico_id", nullable = false)
-	private TipoServico tipoServiço;
+	private TipoServico tipoServico;
 	
 	@ManyToOne
 	@JoinColumn(name = "tipo_pagamento_id", nullable = false)
@@ -48,12 +48,12 @@ public class Servico {
 		this.cliente = cliente;
 	}
 
-	public TipoServico getTipoServiço() {
-		return tipoServiço;
+	public TipoServico getTipoServico() {
+		return tipoServico;
 	}
 
-	public void setTipoServiço(TipoServico tipoServiço) {
-		this.tipoServiço = tipoServiço;
+	public void setTipoServico(TipoServico tipoServico) {
+		this.tipoServico = tipoServico;
 	}
 
 	public TipoPagamento getTipoPagamento() {
